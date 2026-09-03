@@ -1,0 +1,22 @@
+{
+  "id": "com.esko.themo",
+  "version": "0.1.0",
+  "compatibility": ">=12.4.5",
+  "sdk": 3,
+  "platforms": ["local"],
+  "name": { "en": "Themo Thermostats" },
+  "description": { "en": "Monitor and control Themo floor-heating thermostats through the Themo web API." },
+  "category": ["climate"],
+  "permissions": [],
+  "brandColor": "#F26B38",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": { "name": "Esko" },
+  "source": "https://github.com/esko/themo-homey",
+  "bugs": { "url": "https://github.com/esko/themo-homey/issues" },
+  "homepage": "https://github.com/esko/themo-homey"
+}
+

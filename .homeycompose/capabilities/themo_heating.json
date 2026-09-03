@@ -1,0 +1,9 @@
+{
+  "type": "boolean",
+  "title": { "en": "Heating" },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "uiComponent": "sensor"
+}
+

@@ -1,0 +1,144 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.esko.themo",
+  "version": "0.1.0",
+  "compatibility": ">=12.4.5",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Themo Thermostats"
+  },
+  "description": {
+    "en": "Monitor and control Themo floor-heating thermostats through the Themo web API."
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "brandColor": "#F26B38",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Esko"
+  },
+  "source": "https://github.com/esko/themo-homey",
+  "bugs": {
+    "url": "https://github.com/esko/themo-homey/issues"
+  },
+  "homepage": "https://github.com/esko/themo-homey",
+  "drivers": [
+    {
+      "name": {
+        "en": "Themo Smart Thermostat"
+      },
+      "class": "thermostat",
+      "connectivity": [
+        "cloud"
+      ],
+      "icon": "/drivers/thermostat/assets/icon.svg",
+      "images": {
+        "small": "/drivers/thermostat/assets/images/small.png",
+        "large": "/drivers/thermostat/assets/images/large.png",
+        "xlarge": "/drivers/thermostat/assets/images/xlarge.png"
+      },
+      "capabilities": [
+        "measure_temperature",
+        "measure_temperature.floor",
+        "target_temperature",
+        "thermostat_mode",
+        "measure_power",
+        "themo_heating",
+        "themo_schedule"
+      ],
+      "capabilitiesOptions": {
+        "measure_temperature": {
+          "title": {
+            "en": "Room Temperature"
+          },
+          "decimals": 1
+        },
+        "measure_temperature.floor": {
+          "title": {
+            "en": "Floor Temperature"
+          },
+          "decimals": 1
+        },
+        "target_temperature": {
+          "min": 5,
+          "max": 41,
+          "step": 0.5,
+          "decimals": 1
+        },
+        "measure_power": {
+          "title": {
+            "en": "Heating Power"
+          },
+          "decimals": 0
+        }
+      },
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "id": "poll_interval",
+          "type": "number",
+          "label": {
+            "en": "Poll interval (seconds)"
+          },
+          "value": 120,
+          "attr": {
+            "min": 30,
+            "max": 900,
+            "step": 10
+          }
+        }
+      ],
+      "id": "thermostat"
+    }
+  ],
+  "capabilities": {
+    "themo_heating": {
+      "type": "boolean",
+      "title": {
+        "en": "Heating"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor"
+    },
+    "themo_schedule": {
+      "type": "string",
+      "title": {
+        "en": "Active Schedule"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "uiComponent": "sensor"
+    }
+  }
+}
