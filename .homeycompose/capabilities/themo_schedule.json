@@ -4,6 +4,6 @@
   "getable": true,
   "setable": false,
   "insights": false,
-  "uiComponent": "sensor"
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/themo_schedule.svg"
 }
-

@@ -1,42 +1,170 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.esko.themo",
-  "version": "0.1.1",
+  "version": "1.0.7",
   "compatibility": ">=12.4.5",
   "sdk": 3,
   "platforms": [
     "local"
   ],
   "name": {
-    "en": "Themo Thermostats"
+    "en": "Themo"
   },
   "description": {
-    "en": "Monitor and control Themo floor-heating thermostats through the Themo web API."
+    "en": "Heat your floors using affordable exchange electricity"
   },
   "category": [
     "climate"
   ],
+  "tags": {
+    "en": [
+      "themo",
+      "thermostat",
+      "floor heating"
+    ]
+  },
   "permissions": [],
-  "brandColor": "#F26B38",
+  "brandColor": "#52469A",
   "images": {
-    "small": "/assets/images/small.png",
-    "large": "/assets/images/large.png",
-    "xlarge": "/assets/images/xlarge.png"
+    "small": "/assets/images/small.jpg",
+    "large": "/assets/images/large.jpg",
+    "xlarge": "/assets/images/xlarge.jpg"
   },
   "author": {
-    "name": "Esko"
+    "name": "Esko Pyyluoma",
+    "email": "esko.pyyluoma@gmail.com"
   },
   "source": "https://github.com/esko/themo-homey",
   "bugs": {
     "url": "https://github.com/esko/themo-homey/issues"
   },
-  "homepage": "https://github.com/esko/themo-homey",
+  "support": "mailto:esko.pyyluoma@gmail.com",
+  "flow": {
+    "triggers": [
+      {
+        "id": "floor_temperature_changed",
+        "title": {
+          "en": "The floor temperature changed"
+        },
+        "tokens": [
+          {
+            "name": "temperature",
+            "type": "number",
+            "title": {
+              "en": "Temperature"
+            },
+            "example": 24.5
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      },
+      {
+        "id": "heating_started",
+        "title": {
+          "en": "Started heating"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      },
+      {
+        "id": "heating_stopped",
+        "title": {
+          "en": "Stopped heating"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      },
+      {
+        "id": "schedule_changed",
+        "title": {
+          "en": "The active schedule changed"
+        },
+        "tokens": [
+          {
+            "name": "schedule",
+            "type": "string",
+            "title": {
+              "en": "Schedule"
+            },
+            "example": "Weekday"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "floor_temperature_above",
+        "title": {
+          "en": "The floor temperature is !{{above|below}}"
+        },
+        "titleFormatted": {
+          "en": "The floor temperature is !{{above|below}} [[temperature]]°C"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          },
+          {
+            "name": "temperature",
+            "type": "number",
+            "min": 0,
+            "max": 50,
+            "step": 0.5,
+            "placeholder": {
+              "en": "°C"
+            }
+          }
+        ]
+      },
+      {
+        "id": "is_heating",
+        "title": {
+          "en": "Is !{{heating|not heating}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=thermostat"
+          }
+        ]
+      }
+    ]
+  },
   "drivers": [
     {
       "name": {
         "en": "Themo Smart Thermostat"
       },
       "class": "thermostat",
+      "platforms": [
+        "local"
+      ],
       "connectivity": [
         "cloud"
       ],
@@ -78,7 +206,30 @@
           "title": {
             "en": "Heating Power"
           },
-          "decimals": 0
+          "decimals": 0,
+          "approximated": true
+        },
+        "thermostat_mode": {
+          "values": [
+            {
+              "id": "auto",
+              "title": {
+                "en": "Automatic"
+              }
+            },
+            {
+              "id": "heat",
+              "title": {
+                "en": "Heat"
+              }
+            },
+            {
+              "id": "off",
+              "title": {
+                "en": "Off"
+              }
+            }
+          ]
         }
       },
       "pair": [
@@ -92,6 +243,9 @@
             "usernameLabel": {
               "en": "E-mail address"
             },
+            "usernamePlaceholder": {
+              "en": "you@example.com"
+            },
             "passwordLabel": {
               "en": "Password"
             }
@@ -101,7 +255,8 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "add_devices",
+            "prev": "login_credentials"
           }
         },
         {
@@ -109,14 +264,40 @@
           "template": "add_devices"
         }
       ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "Themo account"
+            },
+            "usernameLabel": {
+              "en": "E-mail address"
+            },
+            "usernamePlaceholder": {
+              "en": "you@example.com"
+            },
+            "passwordLabel": {
+              "en": "Password"
+            }
+          }
+        }
+      ],
       "settings": [
         {
           "id": "poll_interval",
           "type": "number",
           "label": {
-            "en": "Poll interval (seconds)"
+            "en": "Poll interval"
+          },
+          "hint": {
+            "en": "How often Homey requests the latest status from Themo. Lower values update faster but use more cloud traffic."
           },
           "value": 120,
+          "units": {
+            "en": "seconds"
+          },
           "attr": {
             "min": 30,
             "max": 900,
@@ -136,7 +317,20 @@
       "getable": true,
       "setable": false,
       "insights": true,
-      "uiComponent": "sensor"
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/themo_heating.svg",
+      "titleTrue": {
+        "en": "Heating"
+      },
+      "titleFalse": {
+        "en": "Idle"
+      },
+      "insightsTitleTrue": {
+        "en": "Started heating"
+      },
+      "insightsTitleFalse": {
+        "en": "Stopped heating"
+      }
     },
     "themo_schedule": {
       "type": "string",
@@ -146,7 +340,8 @@
       "getable": true,
       "setable": false,
       "insights": false,
-      "uiComponent": "sensor"
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/themo_schedule.svg"
     }
   }
 }

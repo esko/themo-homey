@@ -4,7 +4,7 @@ const Homey = require('homey');
 
 class ThemoApp extends Homey.App {
   async onInit() {
-    this.log('Themo Thermostats has been initialized');
+    this.log('Themo has been initialized');
   }
 }
 

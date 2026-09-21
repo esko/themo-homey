@@ -1,0 +1,57 @@
+{
+  "triggers": [
+    {
+      "id": "floor_temperature_changed",
+      "title": { "en": "The floor temperature changed" },
+      "tokens": [
+        {
+          "name": "temperature",
+          "type": "number",
+          "title": { "en": "Temperature" },
+          "example": 24.5
+        }
+      ]
+    },
+    {
+      "id": "heating_started",
+      "title": { "en": "Started heating" }
+    },
+    {
+      "id": "heating_stopped",
+      "title": { "en": "Stopped heating" }
+    },
+    {
+      "id": "schedule_changed",
+      "title": { "en": "The active schedule changed" },
+      "tokens": [
+        {
+          "name": "schedule",
+          "type": "string",
+          "title": { "en": "Schedule" },
+          "example": "Weekday"
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "floor_temperature_above",
+      "title": { "en": "The floor temperature is !{{above|below}}" },
+      "titleFormatted": { "en": "The floor temperature is !{{above|below}} [[temperature]]°C" },
+      "args": [
+        {
+          "name": "temperature",
+          "type": "number",
+          "min": 0,
+          "max": 50,
+          "step": 0.5,
+          "placeholder": { "en": "°C" }
+        }
+      ]
+    },
+    {
+      "id": "is_heating",
+      "title": { "en": "Is !{{heating|not heating}}" }
+    }
+  ]
+}

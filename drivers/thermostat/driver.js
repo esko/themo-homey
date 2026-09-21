@@ -4,6 +4,16 @@ const Homey = require('homey');
 const { ThemoApi } = require('../../lib/themo-api');
 
 class ThemoThermostatDriver extends Homey.Driver {
+  async onInit() {
+    this.homey.flow.getConditionCard('floor_temperature_above').registerRunListener(async (args) => {
+      const value = args.device.getCapabilityValue('measure_temperature.floor');
+      return Number.isFinite(value) && value > args.temperature;
+    });
+    this.homey.flow.getConditionCard('is_heating').registerRunListener(async (args) => {
+      return args.device.getCapabilityValue('themo_heating') === true;
+    });
+  }
+
   async onPair(session) {
     let api;
     let credentials;
@@ -11,7 +21,7 @@ class ThemoThermostatDriver extends Homey.Driver {
     session.setHandler('login', async ({ username, password }) => {
       credentials = { username: String(username).trim(), password: String(password) };
       api = new ThemoApi(credentials);
-      await api.authenticate();
+      await this._authenticate(api);
       return true;
     });
 
@@ -36,6 +46,27 @@ class ThemoThermostatDriver extends Homey.Driver {
         settings: { poll_interval: 120 }
       }));
     });
+  }
+
+  async onRepair(session, device) {
+    session.setHandler('login', async ({ username, password }) => {
+      const credentials = { username: String(username).trim(), password: String(password) };
+      await this._authenticate(new ThemoApi(credentials));
+
+      const previousUsername = device.getStoreValue('username');
+      const devices = this.getDevices().filter((item) => item.getStoreValue('username') === previousUsername);
+      await Promise.all(devices.map((item) => item.applyCredentials(credentials)));
+      return true;
+    });
+  }
+
+  async _authenticate(api) {
+    try {
+      await api.authenticate();
+    } catch (error) {
+      if (error.status === 401) throw new Error('Incorrect e-mail address or password');
+      throw error;
+    }
   }
 }
 

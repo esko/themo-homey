@@ -23,3 +23,16 @@ test('maps Homey modes to Themo commands', () => {
   assert.deepEqual(MODE_TO_THEMO, { auto: 'SLS', heat: 'Manual', off: 'Off' });
 });
 
+test('maps Themo Off to Homey off', () => {
+  const state = mapState({ State: { Mode: 'Off', LS: 0, MP: 1 } });
+  assert.equal(state.mode, 'off');
+  assert.equal(state.heating, false);
+  assert.equal(state.powerWatts, 0);
+});
+
+test('leaves unknown Themo modes unset', () => {
+  const state = mapState({ State: { Mode: 'Holiday' } });
+  assert.equal(state.mode, null);
+  assert.equal(state.activeSchedule, '');
+});
+

@@ -1,15 +1,15 @@
-# Themo Thermostats for Homey
+# Themo for Homey
 
-Native Homey SDK v3 integration for Themo floor-heating thermostats using the
-Themo web API. One account login discovers all thermostats.
+Community Homey SDK v3 app for Themo floor-heating thermostats. Pair a Themo
+account to discover every thermostat, then control temperature and mode from
+Homey.
 
-## Capabilities
+Store listing copy lives in `README.txt`. Edit `.homeycompose/app.json` rather
+than generated `app.json`.
 
-- Room and floor temperature
-- Target temperature
-- Automatic, manual heat and off modes
-- Heating state and estimated instantaneous power
-- Active schedule visibility
-
-Credentials are entered during Homey pairing and are never logged.
+```bash
+npx homey app validate --level publish
+npx homey app run
+npx homey app publish
+```
 

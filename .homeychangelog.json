@@ -1,0 +1,26 @@
+{
+  "1.0.0": {
+    "en": "First public release. Pair a Themo account to add floor-heating thermostats, set temperature and mode, and use heating state in Energy and Flows."
+  },
+  "1.0.1": {
+    "en": "Themo brand color and wordmark, updated store description, and a public source repository."
+  },
+  "1.0.2": {
+    "en": "App icon now uses the Themo wordmark on the purple brand gradient."
+  },
+  "1.0.3": {
+    "en": "Updated the thermostat driver icon."
+  },
+  "1.0.4": {
+    "en": "Corrected the thermostat driver icon."
+  },
+  "1.0.5": {
+    "en": "Fixed the app icon so the Themo wordmark shows on Homey’s purple brand color. Removed the developer website."
+  },
+  "1.0.6": {
+    "en": "App icon now matches Homey’s mask format so the wordmark is visible."
+  },
+  "1.0.7": {
+    "en": "Lifestyle product photo for the App Store listing, and more reliable error logging."
+  }
+}

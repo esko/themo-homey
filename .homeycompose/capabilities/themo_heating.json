@@ -4,6 +4,10 @@
   "getable": true,
   "setable": false,
   "insights": true,
-  "uiComponent": "sensor"
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/themo_heating.svg",
+  "titleTrue": { "en": "Heating" },
+  "titleFalse": { "en": "Idle" },
+  "insightsTitleTrue": { "en": "Started heating" },
+  "insightsTitleFalse": { "en": "Stopped heating" }
 }
-

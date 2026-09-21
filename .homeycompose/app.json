@@ -1,21 +1,25 @@
 {
   "id": "com.esko.themo",
-  "version": "0.1.1",
+  "version": "1.0.7",
   "compatibility": ">=12.4.5",
   "sdk": 3,
   "platforms": ["local"],
-  "name": { "en": "Themo Thermostats" },
-  "description": { "en": "Monitor and control Themo floor-heating thermostats through the Themo web API." },
+  "name": { "en": "Themo" },
+  "description": { "en": "Heat your floors using affordable exchange electricity" },
   "category": ["climate"],
+  "tags": { "en": ["themo", "thermostat", "floor heating"] },
   "permissions": [],
-  "brandColor": "#F26B38",
+  "brandColor": "#52469A",
   "images": {
-    "small": "/assets/images/small.png",
-    "large": "/assets/images/large.png",
-    "xlarge": "/assets/images/xlarge.png"
+    "small": "/assets/images/small.jpg",
+    "large": "/assets/images/large.jpg",
+    "xlarge": "/assets/images/xlarge.jpg"
   },
-  "author": { "name": "Esko" },
+  "author": {
+    "name": "Esko Pyyluoma",
+    "email": "esko.pyyluoma@gmail.com"
+  },
   "source": "https://github.com/esko/themo-homey",
   "bugs": { "url": "https://github.com/esko/themo-homey/issues" },
-  "homepage": "https://github.com/esko/themo-homey"
+  "support": "mailto:esko.pyyluoma@gmail.com"
 }

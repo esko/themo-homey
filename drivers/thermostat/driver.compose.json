@@ -1,6 +1,7 @@
 {
   "name": { "en": "Themo Smart Thermostat" },
   "class": "thermostat",
+  "platforms": ["local"],
   "connectivity": ["cloud"],
   "icon": "/drivers/thermostat/assets/icon.svg",
   "images": {
@@ -21,7 +22,18 @@
     "measure_temperature": { "title": { "en": "Room Temperature" }, "decimals": 1 },
     "measure_temperature.floor": { "title": { "en": "Floor Temperature" }, "decimals": 1 },
     "target_temperature": { "min": 5, "max": 41, "step": 0.5, "decimals": 1 },
-    "measure_power": { "title": { "en": "Heating Power" }, "decimals": 0 }
+    "measure_power": {
+      "title": { "en": "Heating Power" },
+      "decimals": 0,
+      "approximated": true
+    },
+    "thermostat_mode": {
+      "values": [
+        { "id": "auto", "title": { "en": "Automatic" } },
+        { "id": "heat", "title": { "en": "Heat" } },
+        { "id": "off", "title": { "en": "Off" } }
+      ]
+    }
   },
   "pair": [
     {
@@ -30,19 +42,42 @@
       "options": {
         "title": { "en": "Themo account" },
         "usernameLabel": { "en": "E-mail address" },
+        "usernamePlaceholder": { "en": "you@example.com" },
         "passwordLabel": { "en": "Password" }
       }
     },
-    { "id": "list_devices", "template": "list_devices", "navigation": { "next": "add_devices" } },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": { "next": "add_devices", "prev": "login_credentials" }
+    },
     { "id": "add_devices", "template": "add_devices" }
+  ],
+  "repair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "title": { "en": "Themo account" },
+        "usernameLabel": { "en": "E-mail address" },
+        "usernamePlaceholder": { "en": "you@example.com" },
+        "passwordLabel": { "en": "Password" }
+      }
+    }
   ],
   "settings": [
     {
       "id": "poll_interval",
       "type": "number",
-      "label": { "en": "Poll interval (seconds)" },
+      "label": { "en": "Poll interval" },
+      "hint": { "en": "How often Homey requests the latest status from Themo. Lower values update faster but use more cloud traffic." },
       "value": 120,
-      "attr": { "min": 30, "max": 900, "step": 10 }
+      "units": { "en": "seconds" },
+      "attr": {
+        "min": 30,
+        "max": 900,
+        "step": 10
+      }
     }
   ]
 }

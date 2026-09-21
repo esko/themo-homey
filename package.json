@@ -1,13 +1,14 @@
 {
   "name": "com.esko.themo",
-  "version": "0.1.0",
+  "version": "1.0.7",
   "private": true,
-  "description": "Native Homey integration for Themo smart thermostats",
+  "description": "Themo smart thermostats for Homey",
   "main": "app.js",
   "scripts": {
     "test": "node --test"
   },
   "engines": { "node": ">=22" },
-  "dependencies": { "homey": "^4.4.4" }
+  "devDependencies": {
+    "homey": "^4.4.4"
+  }
 }
-
