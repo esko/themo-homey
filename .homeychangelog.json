@@ -22,5 +22,8 @@
   },
   "1.0.7": {
     "en": "Lifestyle product photo for the App Store listing, and more reliable error logging."
+  },
+  "1.0.8": {
+    "en": "App icon wordmark now shows in Safari as well as Chrome."
   }
 }

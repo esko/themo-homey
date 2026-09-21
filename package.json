@@ -1,6 +1,6 @@
 {
   "name": "com.esko.themo",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": true,
   "description": "Themo smart thermostats for Homey",
   "main": "app.js",
